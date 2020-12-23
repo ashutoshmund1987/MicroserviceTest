@@ -4,7 +4,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:50969",
+      "applicationUrl": "http://localhost:51625",
       "sslPort": 0
     }
   },
@@ -12,15 +12,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api_authenticate/v1/authenticate",
+      "launchUrl": "api_gaabs/v1/GetAccountsAndBalances",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AuthenticateAPI": {
+    "GAABs.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api_authenticate/v1/authenticate",
+      "launchUrl": "api_gaabs/v1/GetAccountsAndBalances",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

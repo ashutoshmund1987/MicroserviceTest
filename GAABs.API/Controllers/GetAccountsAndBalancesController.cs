@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GAABs.API.Controllers
 {
-    [Route("api_gaabs/v1/[controller]")]
+    [Route("api_gaabs/v1/[controller]/[action]")]
     [Produces("application/json")]
     [ApiController]
     public class GetAccountsAndBalancesController : ControllerBase
@@ -16,7 +16,11 @@ namespace GAABs.API.Controllers
             this._dataAccess = dataAccess;
         }
 
-        // GET api_gaabs/v1
+        /// <summary>
+        /// POST - api_gaabs/v1/getaccountsandbalancescontroller/getaccountsandbalances
+        /// </summary>
+        /// <param name="apiRequest">The get accounts and balances request</param>
+        /// <returns>The get accounts and balances response model</returns>
         [HttpPost]
         public IActionResult GetAccountsAndBalances([FromBody] GetAccountsAndBalancesRequest apiRequest)
         {

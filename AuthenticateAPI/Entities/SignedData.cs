@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets or sets the STIP active mode
         /// </summary>
-        public string StipActive { get; set; }
+        public bool StipActive { get; set; }
 
         /// <summary>
         /// Gets or sets the public key

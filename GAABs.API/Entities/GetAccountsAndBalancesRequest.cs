@@ -1,4 +1,6 @@
-﻿namespace GAABs.API.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GAABs.API.Entities
 {
     /// <summary>
     /// API - GetAccountsAndBalances service
@@ -8,6 +10,8 @@
         /// <summary>
         /// Gets or sets the customer number
         /// </summary>
+        [MaxLength(10)]
+        [Required]
         public string CustomerNumber { get; set; }
 
         /// <summary>
@@ -17,7 +21,7 @@
 
         /// <summary>
         /// Gets or sets the filter account list
-        /// </summary>
+        /// </summary>        
         public bool FilterAccountList { get; set; }
     }
 }

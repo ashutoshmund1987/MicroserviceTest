@@ -44,7 +44,7 @@ namespace AuthenticateAPI.Controllers
         [ActionName("AuthenticateWithGuid")]
         public IActionResult AuthenticateWithGuid([FromBody] string customerNumber)
         {
-            return Ok();
+            return Ok("authenticated successfully.");
         }
     }
 }

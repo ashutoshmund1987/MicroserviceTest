@@ -16,8 +16,13 @@
         public string Signature { get; set; }
 
         /// <summary>
-        /// Gets or sets the signed data
+        /// Gets or sets the status
         /// </summary>
-        public SignedData SignedData { get; set; }
+        public bool Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the error message
+        /// </summary>
+        public string ErrorMessage { get; set; }
     }
 }

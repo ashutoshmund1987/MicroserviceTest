@@ -1,5 +1,6 @@
 ﻿using AuthenticateAPI.Entities;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace AuthenticateAPI.DataAccess
 {
@@ -36,7 +37,7 @@ namespace AuthenticateAPI.DataAccess
         /// <returns>The string value</returns>
         public string getSignature()
         {
-            return "public key";
+            return "5FF4640023F78DD5DFCEF459AF45BB23738A6CAE60DBFE2BCEEE99762B33CAAB";
         }
 
         /// <summary>
@@ -46,7 +47,14 @@ namespace AuthenticateAPI.DataAccess
         /// <returns>The valid customer number</returns>
         public string getCustomerNumber(string deviceGuid)
         {
-            return "1234567890";
+            var random = new Random();
+            string s = string.Empty;
+
+            for (int i = 0; i < 10; i++)
+            {
+                s = String.Concat(s, random.Next(10).ToString());
+            }               
+            return s;
         }
     }
 }

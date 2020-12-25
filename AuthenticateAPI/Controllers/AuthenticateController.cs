@@ -2,6 +2,7 @@
 using AuthenticateAPI.DataAccess;
 using AuthenticateAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace AuthenticateAPI.Controllers
@@ -28,20 +29,45 @@ namespace AuthenticateAPI.Controllers
         [ActionName("AuthenticateChannel")]
         public IActionResult AuthenticateChannel([FromBody]AuthenticateChannelRequest request)
         {
-            if(!ModelState.IsValid)
+            try
             {
-                string message = string.Join("; ", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
-                return BadRequest(message);
+                if (!ModelState.IsValid)
+                {
+                    string message = string.Join("; ", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+                    return BadRequest(message);
+                }
+
+                if (string.IsNullOrEmpty(request.UserId) || request.UserId.Length != 10)                    
+                {
+                    throw new MissingFieldException("Please enter valid userid with the length of 10 digit");
+                }
+
+                if (string.IsNullOrEmpty(request.Password))
+                {
+                    throw new MissingFieldException("Please enter valid password");
+                }
+
+                AuthenticateChannelResponse responseData = new AuthenticateChannelResponse
+                {
+                    Status = true,
+                    Signature = _authenticateDataAccess.getSignature(),
+                    CustomerNumber = _authenticateDataAccess.getCustomerNumber(request.DeviceGUID)
+                };
+
+                if (request.UserId == request.Password)
+                {
+                    responseData.Status = false;
+                    responseData.ErrorMessage = "M001";
+                    return Ok(responseData);
+                }
+
+                return Ok(responseData);
             }
-
-            AuthenticateChannelResponse responseData = new AuthenticateChannelResponse
+            catch(Exception ex)
             {
-                SignedData = _authenticateDataAccess.getSignedData(),
-                Signature = _authenticateDataAccess.getSignature(),
-                CustomerNumber = _authenticateDataAccess.getCustomerNumber(request.DeviceGUID)
-            };
-
-            return Ok(responseData);
+                return StatusCode(500, ex.Message);
+            }
+           
         }
 
         /// <summary>
